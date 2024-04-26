@@ -1,0 +1,88 @@
+
+/* 검색박스 */
+.search {
+    background-color: #e8dfca;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+}
+
+/* 제목 */
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 검색박스 안에 input */
+.search > input {
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+    margin-left: 11px;
+}
+
+/* 검색박스 안에 버튼 */
+.search > button {
+    height: 30px;
+    border-radius: 5px;
+    margin-left: 11px;
+}
+
+
+body {
+    background-color: #f5efe6;
+}
+
+/* 각 영화 카드 */
+.card {
+    background-color: #1a4d2e;
+    color:#f5efe6;
+
+    height : 700px;
+    width: 300px;
+    border-radius: 10px;
+    /* margin: 3px; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px;
+}
+
+p {
+    width: 250px;
+    height: 300px;
+}
+
+/* 전체 영화 카드 묶음 */
+#mycards {
+    margin: 3%;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* flex-wap : 한 줄에 공간이 부족하면 줄바꿈으로 넘김 */
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+/* API로 불러온 이미지 */
+img {
+    width: 200px;
+    height: 300px;
+    /* object-fit : cover과 contain 뭐가 다른지 확인 */
+    object-fit: contain; 
+    margin-top: 50px;
+    border-radius: 8px;
+}
+
