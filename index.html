@@ -13,14 +13,20 @@
             font-family: "Gowun Dodum", sans-serif;
             font-weight: 400;
             font-style: normal;
-        };
-    </style>
+        }
 
+        ;
+    </style>
     <script>
-        function whatit() {
-            alert('이거 되는거 맞아?');
+
+        // 카드 클릭시 영화 id값 불러오기
+        function whatid() {
+            alert('제발 좀 되라');
         };
+
+
     </script>
+
 </head>
 
 
@@ -28,18 +34,18 @@
     <header class="header">
         <h1>내배캠 최고 평점 영화 콜렉션</h1>
     </header>
-    <form>
-        <div class="search">
-            <h2>영화검색 : </h2>
-            <input type="text" id="search-input" placeholder="영화 제목을 검색해 보세요">
-            <button>검색</button>
-        </div>
 
-    </form>
+    <div class="search">
+        <h2>영화검색 : </h2>
+        <input type="text" id="search-input" placeholder="영화 제목을 검색해 보세요">
+        <button type="button" onclick="search()">검색</button>
+    </div>
+
+
     <section>
         <div id="mycards">
-            <div class="card">
-                <img onclick="whatid()" src="" alt="영화 이미지" />
+            <div onclick="whatid()" class="card">
+                <a href="#"><img src="" alt="영화 이미지" /></a>
                 <h3>영화제목</h3>
                 <p>줄거리 요약</p>
                 <p>평점 : 10</p>

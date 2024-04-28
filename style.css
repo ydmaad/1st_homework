@@ -54,6 +54,8 @@ body {
     justify-content: center;
 
     padding: 10px;
+
+    box-shadow: 5px 5px 5px #4f6f52;
 }
 
 p {
