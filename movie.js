@@ -54,16 +54,6 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
 //   // 그러면 temp_html로 가져온 mycards 형식에 어떤 데이터가 새로 들어가는지 적는 거겠지???
 
 
-
-
-
-// 1. 카드 클릭시 클릭한 영화 id를 나타내는 alert창을 띄우기.....
-
-// 2. 영화 검색 UI구현......
-// 입력 후 검색버튼 클릭시 실행되도록.......
-
-
-
 // 검색기능 넣기......왜 안되는 걸까......
 // function search(){
 //   let text = document.getElementById('search-input')[0].value;
@@ -90,7 +80,7 @@ function search() {
     return titleLowercase.includes(keywordLowerCase); // 1번의 결과에 2번의 결과값이 포함된다면 리턴된다!!!
 
 
-    // 이걸로는 어떻게 하는지 모르겠지만 나중에 찾아봐
+    // 이걸로는 어떻게 하는지 모르겠지만 나중에 찾아보자
     // if (movie.title.includes(inputKeyword)) return true;
     // return movie.title.match(new RegExp("i"))
 
@@ -103,7 +93,7 @@ function search() {
     return;
   }
 
-  //   // [TO-DO]: fetch문에 있는 함수랑 중복인데 하나의 함수를 만들어서 처리하기
+  //   // [TO-DO]: fetch문에 있는 함수랑 중복인데 하나의 함수를 만들어서 처리하기 //......실패....실행이 안됨....
   //   let temp_html = ``;
 
   //   // foreach문은 배열을 순회해서 처리하는 메서드!!
@@ -146,12 +136,12 @@ function createCardsHTML(moviedata) {
     let movieoverview = i['overview'];
     let movieimg = 'https://image.tmdb.org/t/p/w500' + i['poster_path'];
     let movievote = i['vote_average'];
-    let movieId = i['id'];
+    let movieId = i['id']; 
 
     // 순회한 데이터를 mycards에 넣겠다!!
     temp_html += `
       <div class="col">
-          <div class="card">
+          <div class="card" data-id=${movieId}>
               <img src="${movieimg}"
                   class="card-img-top" alt="...">
               <div class="card-body">
@@ -167,6 +157,24 @@ function createCardsHTML(moviedata) {
   return temp_html;
 }
 
+function CardClick(event) {
+  const card = event.currentTarget;
+  const movieId = card.getAttribute('data-id');
+  alert(`영화 ID: ${movieId}`);
+}
+
+const card = document.querySelectorAll('#mycards');
+card.forEach(card => {
+  card.addEventListener('click', CardClick);
+})
+// null 만 나옴....실패
+
+
+
+
+
+
+// ---------참고-----------//
 // function handleCardClick(event) {
 //   const card = event.currentTarget;
 //   const Id = card.getAttribute('data-id'); // 클릭된 카드의 영화 ID 가져오기
@@ -178,3 +186,4 @@ function createCardsHTML(moviedata) {
 //   cards.forEach(card => {
 //     card.addEventListener('click', handleCardClick);
 //   });
+// -----------------------//
