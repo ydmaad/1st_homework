@@ -38,3 +38,33 @@ function searchFunction() {
 
 </body>
 </html>
+
+
+// // 클릭했을 때 영화카드의 id값 가져오기
+// document.addEventListener('DOMContentLoaded', function() {
+//   // 각 카드에 대한 클릭 이벤트 등록
+//   document.getElementById('mycards').addEventListener('click', function(event) {
+//     const clickedElement = event.target.closest('.col');
+
+//     const movieId = clickedElement.querySelector('#card').getAttribute('data-id');
+//     alert(`영화 ID: ${movieId}`);
+//   });
+// });
+
+
+
+
+
+
+// function CardClick(event) {
+//   const card = event.currentTarget;
+//   const movieId = card.getAttribute('data-id');
+//   alert(`영화 ID: ${movieId}`);
+// }
+
+// const card = document.querySelectorAll('#mycards');
+// card.forEach(card => {
+//   card.addEventListener('click', CardClick);
+// })
+// // null 만 나옴....실패
+

@@ -16,51 +16,11 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
   .then(response => {
     moviedata = response.results
     console.log(moviedata);
-    // let temp_html = ``;
 
     let temp_html = createCardsHTML(moviedata);
 
     document.getElementById('mycards').innerHTML = temp_html;
   })
-
-
-
-// // foreach문은 배열을 순회해서 처리하는 메서드!!
-// // moviedata속에 넣을 항목을 선언하여 데이터를 순회한다!!
-// moviedata.forEach(i => {
-//   let movietitle = i['title'];
-//   let movieoverview = i['overview'];
-//   let movieimg = 'https://image.tmdb.org/t/p/w500' + i['poster_path'];
-//   let movievote = i['vote_average'];
-
-//   // 순회한 데이터를 mycards에 넣겠다!!
-//   temp_html += `
-//     <div class="col">
-//         <div class="card">
-//             <img src="${movieimg}"
-//                 class="card-img-top" alt="...">
-//             <div class="card-body">
-//                 <h5 class="card-title">${movietitle}</h5>
-//                 <i class="card-text">${movievote}</i>
-//                 <p class="card-text">${movieoverview}</p>
-//             </div>
-//         </div>
-//     </div>`;
-
-//   document.getElementById('mycards').innerHTML = temp_html
-//   // getElementById('mycards') -> document(html을 부르는 말)에 있는
-//   // 속성의 id가 'mycards'인 것을 가져오겠다!!
-//   // innerHTML도 세트인 거겠지...??
-//   // 그러면 temp_html로 가져온 mycards 형식에 어떤 데이터가 새로 들어가는지 적는 거겠지???
-
-
-// 검색기능 넣기......왜 안되는 걸까......
-// function search(){
-//   let text = document.getElementById('search-input')[0].value;
-//   let res = find('search-input') => {
-//     return id === text
-//   }
-// }
 
 
 function search() {
@@ -93,44 +53,20 @@ function search() {
     return;
   }
 
-  //   // [TO-DO]: fetch문에 있는 함수랑 중복인데 하나의 함수를 만들어서 처리하기 //......실패....실행이 안됨....
-  //   let temp_html = ``;
 
-  //   // foreach문은 배열을 순회해서 처리하는 메서드!!
-  //   // moviedata속에 넣을 항목을 선언하여 데이터를 순회한다!!
-  //   filteredMovieData.forEach(i => {
-  //     let movietitle = i['title'];
-  //     let movieoverview = i['overview'];
-  //     let movieimg = 'https://image.tmdb.org/t/p/w500' + i['poster_path'];
-  //     let movievote = i['vote_average'];
-
-  //     // 순회한 데이터를 mycards에 넣겠다!!
-  //     temp_html += `
-  //         <div class="col">
-  //             <div class="card">
-  //                 <img src="${movieimg}"
-  //                     class="card-img-top" alt="...">
-  //                 <div class="card-body">
-  //                     <h5 class="card-title">${movietitle}</h5>
-  //                     <i class="card-text">${movievote}</i>
-  //                     <p class="card-text">${movieoverview}</p>
-  //                 </div>
-  //             </div>
-  //         </div>`;
-
-  //     document.getElementById('mycards').innerHTML = temp_html
-  //   });
-  // }
-
-  let temp_html = createCardsHTML(moviedata);
+  let temp_html = createCardsHTML(filteredMovieData); 
 
   document.getElementById('mycards').innerHTML = temp_html;
   
 }
 
+
+// 반복되는 기능 함수로 만들기
 function createCardsHTML(moviedata) {
   let temp_html = '';
 
+  // foreach문은 배열을 순회해서 처리하는 메서드!!
+  // moviedata속에 넣을 항목을 선언하여 데이터를 순회한다!!
   moviedata.forEach(i => {
     let movietitle = i['title'];
     let movieoverview = i['overview'];
@@ -141,49 +77,35 @@ function createCardsHTML(moviedata) {
     // 순회한 데이터를 mycards에 넣겠다!!
     temp_html += `
       <div class="col">
-          <div class="card" data-id=${movieId}>
-              <img src="${movieimg}"
-                  class="card-img-top" alt="...">
-              <div class="card-body">
+          <div id="card" data-id=${movieId}>
+            <a href="#"><img src="${movieimg}" class="card-img-top" alt="..."></a>
+                <div class="card-body">
                   <h5 class="card-title">${movietitle}</h5>
                   <i class="card-text">${movievote}</i>
                   <p class="card-text">${movieoverview}</p>
               </div>
-          </div>
+         </div>
       </div>`;
 
     document.getElementById('mycards').innerHTML = temp_html
+    // getElementById('mycards') -> document(html을 부르는 말)에 있는
+    // 속성의 id가 'mycards'인 것을 가져오겠다!!
+    // innerHTML도 세트인 거겠지...??
+    // 그러면 temp_html로 가져온 mycards 형식에 어떤 데이터가 새로 들어가는지 적는 거겠지???
+
   });
   return temp_html;
 }
 
-function CardClick(event) {
-  const card = event.currentTarget;
-  const movieId = card.getAttribute('data-id');
-  alert(`영화 ID: ${movieId}`);
-}
+// 클릭했을 때 영화카드의 id값 가져오기
+// 1. html요소에서 id값이 mycards라는 곳에 클릭이벤트를 주고, 클릭이 되면 이벤트핸들러함수를 실행할거야
+  document.getElementById('mycards').addEventListener('click', function(event) {
+    // 2. 클릭된요소는 클릭된 함수이벤트의 타겟이되는 카드이다
+    // event.target은 실제 이벤트 실행된 타겟을 말함
+    // closest()메소드는 가까운 조상님을 찾는 함수
+    const clickedElement = event.target.closest('.col');
+    // 3. movieId는 clickedElement에서 id값이 card인 요소를 찾아 data-id의 속성값을 가져온것
+    const movieId = clickedElement.querySelector('#card').getAttribute('data-id');
+    alert(`영화 ID: ${movieId}`);
+  });
 
-const card = document.querySelectorAll('#mycards');
-card.forEach(card => {
-  card.addEventListener('click', CardClick);
-})
-// null 만 나옴....실패
-
-
-
-
-
-
-// ---------참고-----------//
-// function handleCardClick(event) {
-//   const card = event.currentTarget;
-//   const Id = card.getAttribute('data-id'); // 클릭된 카드의 영화 ID 가져오기
-//   alert(`클릭된 영화 ID: ${Id}`);
-// }
-
-
-// const cards = mycardsElement.querySelectorAll('#mycards .card');
-//   cards.forEach(card => {
-//     card.addEventListener('click', handleCardClick);
-//   });
-// -----------------------//

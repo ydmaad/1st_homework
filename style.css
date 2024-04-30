@@ -39,9 +39,8 @@ body {
 }
 
 /* 각 영화 카드 */
-.card {
-    background-color: #1a4d2e;
-    color:#f5efe6;
+#card {
+    color:#1a4d2e;
 
     height : 700px;
     width: 300px;
